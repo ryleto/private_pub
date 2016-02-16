@@ -4,15 +4,16 @@ Private Pub is a Ruby gem for use with Rails to publish and subscribe to message
 
 Watch [RailsCasts Episode 316](http://railscasts.com/episodes/316-private-pub) for a demonstration of Private Pub.
 
-
 ## Setup
 
-Add the gem to your Gemfile and run the `bundle` command to install it. You'll probably want to add "thin" to your Gemfile as well to serve Faye.
+**Note:**  This is an amended version of the [Private Pub](https://github.com/ryanb/private_pub) gem which includes a patch for the channel multi-subscribe issue addressed [here](https://github.com/ryanb/private_pub/pull/70).  This patch version can be substituted in a Rails project by specifying the git source in your gemfile as follows:
 
 ```ruby
-gem "private_pub"
+gem "private_pub", :git => 'https://github.com/ryleto/private_pub.git'
 gem "thin"
 ```
+
+Add the gem to your Gemfile and run the `bundle` command to install it. You'll probably want to add "thin" to your Gemfile as well to serve Faye. If you are using another web server such as Puma, you can modify the rackup file and startup command accordingly.
 
 Run the generator to create the initial files.
 
@@ -24,6 +25,10 @@ Next, start up Faye using the rackup file that was generated.
 
 ```
 rackup private_pub.ru -s thin -E production
+```
+or
+```
+rackup private_pub.ru -s puma -E production
 ```
 
 **In Rails 3.1** add the JavaScript file to your application.js file manifest.
