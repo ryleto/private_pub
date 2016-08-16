@@ -2,11 +2,11 @@
 
 Private Pub is a Ruby gem for use with Rails to publish and subscribe to messages through [Faye](http://faye.jcoglan.com/). It allows you to easily provide real-time updates through an open socket without tying up a Rails process. All channels are private so users can only listen to events you subscribe them to.
 
-Watch [RailsCasts Episode 316](http://railscasts.com/episodes/316-private-pub) for a demonstration of Private Pub.
+**Note:**  This is an amended version of the [Private Pub](https://github.com/ryanb/private_pub) gem which includes a patch for the channel multi-subscribe issue addressed [here](https://github.com/ryanb/private_pub/pull/70).  
 
 ## Setup
 
-**Note:**  This is an amended version of the [Private Pub](https://github.com/ryanb/private_pub) gem which includes a patch for the channel multi-subscribe issue addressed [here](https://github.com/ryanb/private_pub/pull/70).  This patch version can be substituted in a Rails project by specifying the git source in your gemfile as follows:
+This patch version can be substituted in a Rails project by specifying the git source in your gemfile as follows:
 
 ```ruby
 gem "private_pub", :git => 'https://github.com/ryleto/private_pub.git'
@@ -31,20 +31,7 @@ or
 rackup private_pub.ru -s puma -E production
 ```
 
-**In Rails 3.1** add the JavaScript file to your application.js file manifest.
-
-```javascript
-//= require private_pub
-```
-
-**In Rails 3.0** add the generated private_pub.js file to your layout.
-
-```rhtml
-<%= javascript_include_tag "private_pub" %>
-```
-
 It's not necessary to include faye.js since that will be handled automatically for you.
-
 
 ## Usage
 
@@ -136,13 +123,3 @@ Finally start up Thin from the project root.
 ```
 thin -C config/private_pub_thin.yml start
 ```
-
-
-##  Project Status
-
-Unfortunately I have not had time to actively work on this project recently. If you find a critical issue where it does not work as documented please [ping me on Twitter](http://twitter.com/rbates) and I'll take a look.
-
-
-## Development & Feedback
-
-Questions or comments? Please use the [issue tracker](https://github.com/ryanb/private_pub/issues). Tests can be run with `bundle` and `rake` commands.
